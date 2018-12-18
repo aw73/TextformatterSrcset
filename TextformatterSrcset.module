@@ -10,7 +10,7 @@ class TextformatterSrcset extends Textformatter implements ConfigurableModule {
 	public static function getModuleInfo() {
 		return array(
 			'title' => 'Srcset Image Textformatter', 
-			'version' => 100, 
+			'version' => 101, 
 			'summary' => "Adds the srcset to images within a textarea" ,
 			'author' => 'Conclurer GbR'
 		); 
