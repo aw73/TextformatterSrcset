@@ -127,14 +127,18 @@ class TextformatterSrcset extends Textformatter implements ConfigurableModule {
 				$meta['imageName'] = $tmp1[0];				
 				$meta['ext'] = $tmp1[count($tmp1)-1];
 				
-				//Thanks to Horst Nogajski for the following snippet
+				// Thanks to Horst Nogajski for the following snippet
 				foreach($p->fields as $field) {
 				    if (! (bool) ($field->type instanceof FieldtypeImage)) continue; // if no images field, go on
 				    
-				    // find the field that holds the image
-				    if (!$p->get($field->name)->has('name=' . $meta['imageName'] . '.' . $meta['ext'])) continue;
-				    
-
+					/// find the field that holds the image
+					if ($p->get($field->name) !== null) {
+						if (!$p->get($field->name)->getFile($meta['imageName'] . '.' . $meta['ext'])) continue;
+					} else {
+						continue;
+					}
+					
+					// Set image
 					$image = $p->get($field->name)->get('name=' . $meta['imageName'] . '.' . $meta['ext']);			
 				}
 				
